@@ -39,6 +39,15 @@ namespace GetActualWeatherConsole
             {
                 return;
             }
+            if (text == "/start")
+            {
+                await client.SendTextMessageAsync(
+                chatId: e.Message.Chat,
+                text: "Здравствуйте!\nЭто бот, дающий информацию о погоде. Просто напишите название города и нажмите на необходимую кнопку."
+                ).ConfigureAwait(false);
+            }
+            else
+            {
                 var ikm = new InlineKeyboardMarkup(new[]
                 {
                     new[]
@@ -59,6 +68,7 @@ namespace GetActualWeatherConsole
                     text: $"{text}? Узнать текущую погоду в городе или же дать прогноз на неделю/месяц?",
                     replyMarkup: ikm
                     ).ConfigureAwait(false);
+            }
         }
 
         private static async void Bot_onCallbackQuery(object sender, CallbackQueryEventArgs ev)
