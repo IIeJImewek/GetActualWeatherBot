@@ -11,7 +11,13 @@ namespace GetActualWeatherConsole
         public Temperature main;
         public string name;
         public Wind wind;
+        public Coordinates coord;
         public WeatherNow[] weather;
+    }
+    public class Coordinates
+    {
+        public string lon;
+        public string lat;
     }
     public class Temperature
     {
