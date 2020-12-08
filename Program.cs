@@ -104,7 +104,7 @@ namespace GetActualWeatherConsole
         public static string WeeklyWeather(string text)
         {   
             //Получаем сначала координаты города из WeatherCurrent
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"http://api.openweathermap.org/data/2.5/weather?q=" + text + "&appid=2b087ac0e4797f107850e6d7595e1f87&units=metric&lang=ru");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"http://api.openweathermap.org/data/2.5/weather?q={text}&appid=2b087ac0e4797f107850e6d7595e1f87&units=metric&lang=ru");
             request.Method = "POST";
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             string answer = string.Empty;
@@ -121,7 +121,7 @@ namespace GetActualWeatherConsole
             WeatherCurrent info = JsonConvert.DeserializeObject<WeatherCurrent>(answer);
 
             //Теперь вытягиваем недельный прогноз погоды по данным координатам
-            HttpWebRequest request1 = (HttpWebRequest)WebRequest.Create($"http://api.openweathermap.org/data/2.5/onecall?lat=" + info.coord.lat + "&lon=" + info.coord.lon +"&exclude=current,minutely,hourly,alerts&appid=2b087ac0e4797f107850e6d7595e1f87&units=metric&lang=ru");
+            HttpWebRequest request1 = (HttpWebRequest)WebRequest.Create($"http://api.openweathermap.org/data/2.5/onecall?lat={info.coord.lat}&lon={info.coord.lon}&exclude=current,minutely,hourly,alerts&appid=2b087ac0e4797f107850e6d7595e1f87&units=metric&lang=ru");
             request1.Method = "POST";
             HttpWebResponse response1 = (HttpWebResponse)request1.GetResponse();
             string answer1 = string.Empty;
@@ -151,10 +151,10 @@ namespace GetActualWeatherConsole
         }
         public static string CurrentWeather(string text)
         {
-                //создаём запрос по ссылке (добавил &units=metric, чтобы писало в цельсиях и &lang=ru чтобы выводило на русском название)
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"http://api.openweathermap.org/data/2.5/weather?q=" + text + "&appid=2b087ac0e4797f107850e6d7595e1f87&units=metric&lang=ru");
-                //пост метод для отправки данных сервису
-                request.Method = "POST";
+            //создаём запрос по ссылке (добавил &units=metric, чтобы писало в цельсиях и &lang=ru чтобы выводило на русском название)
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"http://api.openweathermap.org/data/2.5/weather?q={text}&appid=2b087ac0e4797f107850e6d7595e1f87&units=metric&lang=ru");
+            //пост метод для отправки данных сервису
+            request.Method = "POST";
                 //для получения ответа от сервиса
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 string answer = string.Empty;
